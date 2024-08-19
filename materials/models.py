@@ -4,7 +4,6 @@ from config import settings
 
 
 class Course(models.Model):
-    objects = None
     title = models.CharField(
         max_length=100, verbose_name="Название", help_text="Укажите название курса"
     )
