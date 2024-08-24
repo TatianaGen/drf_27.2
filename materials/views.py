@@ -16,6 +16,7 @@ from users.permissions import IsModer, IsOwner
 class CourseViewSet(ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+
     def perform_create(self, serializer):
         course = serializer.save()
         course.owner = self.request.user
@@ -29,8 +30,6 @@ class CourseViewSet(ModelViewSet):
         elif self.action == 'destroy':
             self.permission_classes = (IsOwner, )
         return super().get_permissions()
-
-
 
 
 class LessonCreateAPIView(CreateAPIView):

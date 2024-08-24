@@ -31,13 +31,13 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
-    class Meta:
-        verbose_name = "Курс"
-        verbose_name_plural = "Курсы"
+
+class Meta:
+    verbose_name = "Курс"
+    verbose_name_plural = "Курсы"
 
 
 class Lesson(models.Model):
-    objects = None
     title = models.CharField(
         max_length=100, verbose_name="Название", help_text="Укажите название урока"
     )
@@ -60,7 +60,6 @@ class Lesson(models.Model):
         null=True,
         help_text="Укажите ссылку на видео",
     )
-
     course = models.ForeignKey(
         Course,
         on_delete=models.SET_NULL,
