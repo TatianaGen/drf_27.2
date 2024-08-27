@@ -13,6 +13,7 @@ class LessonSerializer(ModelSerializer):
 
 
 
+
 class CourseSerializer(ModelSerializer):
     lessons_count = SerializerMethodField()
     lessons = LessonSerializer(source="lesson_set", many=True, read_only=True)
@@ -25,8 +26,17 @@ class CourseSerializer(ModelSerializer):
     def get_lessons_count(self, instance):
         return instance.lesson_set.count()
 
+    def get_is_subscribed(self, instance):
+        user = self.context['request'].user
+        sub = Subscribe.objects.filter(user=user, course=instance)
+        if sub.exists():
+            return 'Подписка оформлена'
+        else:
+            return 'Вы не подписаны на курс'
+
 
 class SubscriptionSerializer(ModelSerializer):
     class Meta:
         model = Subscription
         fields = '__all__'
+

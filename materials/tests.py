@@ -101,3 +101,12 @@ class SubscriptionTestCase(APITestCase):
         self.assertEqual(
             response.data.get('message'), 'Подписка отключена'
         )
+
+    def test_unsubscribe(self):
+        url = reverse("materials:set_subscribe", args=(self.course.pk,))
+        response = self.client.post(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(
+            response.json(),
+            {'message': 'подписка добавлена'}
+        )
