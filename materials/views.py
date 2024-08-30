@@ -1,3 +1,5 @@
+from django.utils.decorators import method_decorator
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.generics import (
     CreateAPIView,
@@ -16,6 +18,11 @@ from materials.paginators import MaterialsPaginator
 from materials.serializer import CourseSerializer, LessonSerializer, SubscriptionSerializer
 from users.permissions import IsModer, IsOwner
 
+
+
+@method_decorator(name='list', decorator=swagger_auto_schema(
+    operation_description="Список курсов"
+))
 
 class CourseViewSet(ModelViewSet):
     queryset = Course.objects.all()
