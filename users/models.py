@@ -68,9 +68,12 @@ class Payments(models.Model):
     payment_amount = models.PositiveIntegerField(verbose_name="Сумма оплаты")
     payment_method = models.CharField(max_length=50, choices=PAYMENTS_VARIANTS)
 
+    session_id = models.CharField(max_length=400, verbose_name='ID сессии', blank=True, null=True)
+    link = models.URLField(max_length=400, verbose_name='ссылка на оплату', blank=True, null=True)
+
     def __str__(self):
         return f"{self.user} - {self.course if self.course else self.lesson}"
 
     class Meta:
-        verbose_name = "платежи"
-        verbose_name_plural = "платежи"
+         verbose_name = "платежи"
+         verbose_name_plural = "платежи"
