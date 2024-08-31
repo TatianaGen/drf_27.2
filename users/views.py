@@ -7,6 +7,7 @@ from rest_framework.viewsets import ModelViewSet
 from users.models import User, Payments
 from users.serializer import UserSerializer, PaymentsSerializer
 from users.services import create_stripe_product, create_stripe_price, create_stripe_session
+
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
